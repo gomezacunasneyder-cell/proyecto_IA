@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrendGear Operational Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="cyber-header">
+    <nav class="cyber-nav">
+      <a href="#" id="nav-resumen" class="nav-link active">Resumen</a>
+      <a href="#" id="nav-clientes" class="nav-link">Clientes</a>
+      <a href="#" id="nav-analitico" class="nav-link">Analítico</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-container">
+    
+  
+    <section id="view-resumen" class="dashboard-view">
+      <h1 class="glitch-title">Resumen de Operaciones</h1>
+      <h2>Top 10 Clientes (Mayores Depósitos)</h2>
+      <div class="table-container">
+        <table class="cyber-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Cliente</th>
+              <th>Ciudad</th>
+              <th>Membresía</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody id="table-body-resumen">
+            <tr>
+              <td colspan="5" class="loading-state">CONECTANDO CON EL SERVIDOR...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  
+    <section id="view-clientes" class="dashboard-view hidden">
+      <h1 class="glitch-title">Base de Datos de Clientes</h1>
+      <div class="search-box">
+        <input type="text" id="cyberpunk-search-input" placeholder="ACCEDER AL SISTEMA: Buscar por Nombre o Ciudad...">
+      </div>
+      <div class="table-container">
+        <table class="cyber-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Email</th>
+              <th>Ciudad</th>
+              <th>Membresía</th>
+              <th>Gasto Total</th>
+            </tr>
+          </thead>
+          <tbody id="table-body-clientes">
+          
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <section id="view-analitico" class="dashboard-view hidden">
+      <h1 class="glitch-title">Módulo Analítico</h1>
+      <div class="stats-grid">
+        <div class="chart-card">
+          <h3>Membership Status</h3>
+          <div id="membership-dona-chart" class="dona-chart"></div>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="dot gold"></span> Gold: <span id="legend-gold-pct">0%</span></span>
+            <span class="legend-item"><span class="dot silver"></span> Silver: <span id="legend-silver-pct">0%</span></span>
+            <span class="legend-item"><span class="dot bronze"></span> Bronze: <span id="legend-bronze-pct">0%</span></span>
+          </div>
+        </div>
+
+        <div class="progress-card">
+          <h3>Top Ciudades</h3>
+          <div id="cities-progress-container"></div>
+        </div>
+
+        <div class="progress-card">
+          <h3>Métodos de Pago</h3>
+          <div id="payments-progress-container"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
