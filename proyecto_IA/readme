@@ -1,0 +1,78 @@
+Prompt Maestro para Recrear el "TrendGear Operational Dashboard"
+Actúa como un Desarrollador Frontend Senior y experto en UI/UX con especialidad en interfaces futuristas/cyberpunk. Necesito que crees una aplicación web interactiva de una sola página (SPA - Single Page Application) utilizando únicamente HTML5 nativo, CSS3 moderno y Vanilla JavaScript (ES6+). La aplicación debe consumir datos en tiempo real de una base de datos NoSQL en Firebase Realtime Database.
+
+Divide el proyecto en tres archivos separados (index.html, style.css, script.js) siguiendo estas especificaciones exactas:
+
+---
+
+1. ARQUITECTURA DE DATOS Y RESILIENCIA (script.js):
+- Implementa una arquitectura asíncrona (async/await) para conectarte a una URL de Firebase Realtime Database (usa 'https://proyecto2-7faed-default-rtdb.firebaseio.com/.json' como endpoint por defecto).
+- Diseña el consumo para que sea tolerante a fallos: usa un sanitizador que limpie registros nulos producidos por borrados en el backend mediante la lógica: 'Array.isArray(data) ? data.filter(Boolean) : Object.values(data || {})'.
+- Implementa un helper flexible para la lógica de negocio ('getAmountSpent') que unifique variantes de campos de entrada (como 'Amount Spent ($)', 'Amount Spent' o 'amountSpent') y limpie strings monetarios con expresiones regulares si es necesario.
+- Mantén un estado global de la aplicación ('AppState') que actúe como la "Única Fuente de Verdad" para almacenar los datos limpios.
+
+2. SISTEMA DE NAVEGACIÓN Y VISTAS (SPA):
+- La interfaz debe estar dividida en tres secciones lógicas (vistas) controladas por identificadores (IDs) únicos en el HTML: 
+  * #view-resumen: Muestra el título "Resumen de Operaciones" y una tabla con el Top 10 de clientes con mayores gastos ("Top Spenders") ordenados de forma descendente usando '.sort()' y '.slice(0, 10)' para optimizar la carga inicial (Modo Resumen).
+  * #view-clientes: Muestra la base de datos completa de clientes con un buscador en vivo por input. La tabla debe incluir columnas para: ID del Cliente, Nombre, Email, Ciudad, Estado de Membresía y Gasto Total.
+  * #view-analitico: Muestra widgets estadísticos avanzados.
+- Implementa un conmutador de navegación en Vanilla JS que asocie listeners de eventos ('click') a los enlaces de navegación por ID, alternando la clase CSS '.hidden' para ocultar/mostrar las secciones sin recargar la página.
+
+3. RENDERIZADO DINÁMICO DE COMPONENTES:
+- Inyecta las tablas de forma limpia y eficiente usando Template Literals con un mapeo/bucle óptimo para reducir la re-pintada del DOM. Asegura un escape de caracteres HTML básico para mitigar ataques XSS en campos de texto de usuarios.
+- En la vista analítica, crea un gráfico circular de dona ("Membership Status") sin dependencias externas (prohibido Chart.js). Calcula matemáticamente el peso relativo (%) de membresías (Gold, Silver, Bronze) y genera un degradado cónico dinámico ('conic-gradient') aplicado directamente en el estilo inline del contenedor circular.
+- Para las secciones de "Top Ciudades" y "Métodos de Pago", genera barras de progreso horizontales dinámicas donde el ancho ('width %') de cada barra se calcule de manera proporcional al elemento con el valor de frecuencia máximo de la lista.
+
+4. MOTOR DE BÚSQUEDA FLUIDO:
+- Añade un escuchador del evento 'input' en el buscador de la sección de Clientes que filtre en tiempo real por coincidencias en los campos 'Nombre' o 'Ciudad' (con normalización a minúsculas). 
+- Si el buscador tiene texto, debe barrer sobre el 100% de los datos sin límites de registros; si se limpia, debe restaurar la vista al estado inicial.
+
+5. DISEÑO VISUAL Y ESTILO (style.css):
+- Diseña una estética Cyberpunk de alto impacto visual con paleta de colores neón sobre fondo ultra oscuro:
+  * Fondo general: #08090f
+  * Fondo de paneles: #111320
+  * Rosa neón: #ff007f (para acentos y títulos secundarios)
+  * Cian neón: #00f0ff (para títulos principales y enlaces activos)
+  * Morado eléctrico: #7f00ff (para bordes y elementos secundarios)
+  * Verde neón: #39ff14 (para resaltar montos y dinero en formato USD)
+- Usa fuentes monoespaciadas tipo 'Courier New' o similares para dar un aspecto de terminal de hackeo hacker.
+- Crea clases de badge personalizadas para los estados de membresía (Gold, Silver, Bronze) con bordes neón y opacidades de fondo que combinen con su respectivo rango.
+- Añade transiciones suaves para los efectos hover de las filas y la barra de progreso.
+
+Por favor, entrégame el código de cada archivo por separado, limpio, robusto, modular y completamente libre de comentarios explicativos innecesarios dentro del código para que sea perfectamente productivo.
+# 🌐 TrendGear Operational Dashboard ─── Cyberpunk Edition
+
+¡Bienvenido al panel operativo de alto rendimiento de **TrendGear**! Este proyecto es una aplicación web interactiva de una sola página (SPA) diseñada con una estética de terminal retro-futurista (Cyberpunk), optimizada para visualizar y gestionar flujos de datos en tiempo real de clientes mediante la integración directa con **Firebase Realtime Database**.
+
+Desarrollado por **Steven**.
+
+---
+
+## 🚀 Características Clave
+
+*   **Arquitectura SPA Nativa (Single Page Application):** Transición fluida e instantánea entre las secciones de **Resumen**, **Clientes** y **Analítico** mediante el manejo dinámico de IDs en Vanilla JS, eliminando la necesidad de recargar la página.
+*   **Conexión NoSQL en Tiempo Real:** Consumo asíncrono y resiliente a fallos que procesa, limpia y sanitiza automáticamente los registros provenientes de la base de datos en la nube.
+*   **Visualización Analítica sin Dependencias:** 
+    *   *Membership Status:* Gráfico de dona circular dinámico e interactivo renderizado matemáticamente con `conic-gradient` de CSS3 puro (sin usar librerías externas como Chart.js).
+    *   *Métricas de Actividad:* Barras de progreso proporcionales generadas dinámicamente para clasificar las "Top Ciudades" y los "Métodos de Pago" más utilizados por frecuencia.
+*   **Buscador Inteligente en Tiempo Real:** Filtrado interactivo instantáneo de la base de datos de clientes por coincidencia de **Nombre** o **Ciudad**.
+*   **Diseño de Vanguardia Cyberpunk:** Paleta de colores neón vibrantes (`#ff007f` rosa, `#00f0ff` cian, `#7f00ff` morado, y `#39ff14` verde neón para flujos financieros de gasto) sobre un fondo ultra oscuro optimizado.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+*   **HTML5 Semántico:** Estructura limpia segmentada por contenedores de sección de vista independientes.
+*   **CSS3 Moderno:** Flexbox, CSS Grid, Variables Nativas, animaciones personalizadas de transición y efectos de brillo neón.
+*   **Vanilla JavaScript (ES6+):** Lógica asíncrona mediante la API `Fetch`, sanitización de datos JSON, manejo del DOM por selectores de identificadores únicos (`id`) y lógica de filtrado de arreglos.
+*   **Firebase Realtime Database:** Backend NoSQL para el alojamiento y sincronización de datos de clientes.
+
+---
+
+## 📁 Estructura de Archivos
+
+```bash
+├── index.html       # Estructura del DOM y secciones de vista de la aplicación
+├── style.css        # Estilos visuales, efectos neón, animaciones y ocultamiento por clase .hidden
+├── script.js       # Consumo de la base de datos, conmutador de navegación, filtrado y gráficos matemáticos
+└── README.md        # Documentación de la plataforma
